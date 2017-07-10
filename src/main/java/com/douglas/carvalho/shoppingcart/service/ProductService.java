@@ -32,4 +32,8 @@ public class ProductService {
     public void saveInitialBatch(){
         productRepository.save(products);
     }
+    
+    public List<Product> findAll(){
+    	return (List<Product>) productRepository.findAll();
+    }
 }
