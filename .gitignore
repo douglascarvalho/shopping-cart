@@ -25,4 +25,5 @@ nbdist/
 .mvn/
 
 bower_components/
-
+node/
+node_modules/

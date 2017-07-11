@@ -1,0 +1,13 @@
+{
+  "name": "shopping-cart-dc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+  },
+  "author": "Douglas Carvalho",
+  "license": "ISC",
+  "devDependencies": {
+	"bower": "1.8.0"
+  }
+}
