@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.douglas.carvalho.shoppingcart.domain.Product;
 import com.douglas.carvalho.shoppingcart.service.ProductService;
 
+/**
+ * 10/07/2017
+ * @author doug
+ */
 @RestController
 @RequestMapping("/products")
 public class ProductController {

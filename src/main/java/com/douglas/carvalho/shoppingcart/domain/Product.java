@@ -9,6 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * 10/07/2017
+ * @author doug
+ */
 @Entity
 @Table(name = "product")
 public class Product {

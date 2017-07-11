@@ -12,6 +12,10 @@ import org.springframework.stereotype.Service;
 import com.douglas.carvalho.shoppingcart.domain.Product;
 import com.douglas.carvalho.shoppingcart.repository.ProductRepository;
 
+/**
+ * 10/07/2017
+ * @author doug
+ */
 @Service
 @Transactional
 public class ProductService {

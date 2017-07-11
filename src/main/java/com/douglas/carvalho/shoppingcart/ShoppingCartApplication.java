@@ -6,6 +6,10 @@ import org.springframework.context.ConfigurableApplicationContext;
 
 import com.douglas.carvalho.shoppingcart.service.ProductService;
 
+/**
+ * 10/07/2017
+ * @author doug
+ */
 @SpringBootApplication
 public class ShoppingCartApplication {
 
