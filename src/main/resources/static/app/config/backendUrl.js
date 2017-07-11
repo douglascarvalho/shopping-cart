@@ -1,1 +1,1 @@
-angular.module('primeiraApp').constant('restUrl', 'http://127.0.0.1:8080/shoppingcart')
+angular.module('primeiraApp').constant('restUrl', 'http://shopping-cart-dc.herokuapp.com/shoppingcart')
