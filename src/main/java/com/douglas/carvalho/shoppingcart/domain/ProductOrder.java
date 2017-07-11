@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * 10/07/2017
  * @author doug
@@ -21,11 +23,12 @@ public class ProductOrder {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 	
+	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "order_id")
-	private Order order;
+	@JoinColumn(name = "shopping_cart_id")
+	private ShoppingCart shoppingCart;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.DETACH)
 	@JoinColumn(name = "product_id")
 	private Product product;
 	
@@ -37,11 +40,11 @@ public class ProductOrder {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Order getOrder() {
-		return order;
+	public ShoppingCart getShoppingCart() {
+		return shoppingCart;
 	}
-	public void setOrder(Order order) {
-		this.order = order;
+	public void setShoppingCart(ShoppingCart shoppingCart) {
+		this.shoppingCart = shoppingCart;
 	}
 	public Product getProduct() {
 		return product;
@@ -55,4 +58,28 @@ public class ProductOrder {
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ProductOrder other = (ProductOrder) obj;
+		if (shoppingCart == null) {
+			if (other.shoppingCart != null)
+				return false;
+		} else if (!shoppingCart.equals(other.shoppingCart))
+			return false;
+		if (product == null) {
+			if (other.product != null)
+				return false;
+		} else if (!product.equals(other.product))
+			return false;
+		return true;
+	}	
+	
+	
 }

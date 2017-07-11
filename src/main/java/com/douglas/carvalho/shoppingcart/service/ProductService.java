@@ -40,4 +40,8 @@ public class ProductService {
     public List<Product> findAll(){
     	return (List<Product>) productRepository.findAll();
     }
+    
+    public Product findById(Long productId){
+    	return productRepository.findOne(productId);
+    }
 }
