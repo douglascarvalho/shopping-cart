@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html ng-app="primeiraApp">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Shopping Cart Doug</title>
+  </head>
+  <body>
+    <div>
+    	
+    	<h1>Shopping Cart Doug</h1>
+    	
+    	<section class="content" ng-controller="ProductCtrl as product">
+		  <div class="row" style="margin-bottom:50px">
+		  
+		  	<ul>
+		  		<li ng-repeat="p in product.data"> {{ p.name }} </li>
+		  	</ul>
+		  	
+		  </div>
+		</section>
+    </div>
+    
+    <script type="text/javascript" src="./bower_components/angular/angular.min.js"></script>
+    <script type="text/javascript" src="./bower_components/angular-route/angular-route.min.js"></script>
+    <script type="text/javascript" src="./bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script type="text/javascript" src="./bower_components/angular-resource/angular-resource.min.js"></script>
+    <script type="text/javascript" src="./bower_components/lodash/dist/lodash.min.js"></script>
+    <script type="text/javascript" src="./app/index.js"></script>
+    <script type="text/javascript" src="./app/config/backendUrl.js"></script>
+    <script type="text/javascript" src="./app/product/productController.js"></script>
+    
+  </body>
+</html>
