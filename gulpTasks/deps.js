@@ -18,7 +18,8 @@ gulp.task('deps.js', function() {
     'node_modules/angular-animate/angular-animate.min.js',
     'node_modules/jquery/dist/jquery.min.js',
     'node_modules/bootstrap/dist/js/bootstrap.min.js',
-    'node_modules/lodash/dist/lodash.min.js'
+    'node_modules/lodash/dist/lodash.min.js',
+    'node_modules/ng-number-spin/dist/js/ng-number-spin.min.js'
   ])
   .pipe(uglify())
   .pipe(concat('deps.min.js'))
@@ -27,7 +28,8 @@ gulp.task('deps.js', function() {
 
 gulp.task('deps.css', function() {
   gulp.src([
-    'node_modules/bootstrap/dist/css/bootstrap.min.css'
+    'node_modules/bootstrap/dist/css/bootstrap.min.css',
+    'node_modules/ng-number-spin/dist/css/ng-number-spin.min.css'  
   ])
   .pipe(uglifycss({ "uglyComments": true }))
   .pipe(concat('deps.min.css'))

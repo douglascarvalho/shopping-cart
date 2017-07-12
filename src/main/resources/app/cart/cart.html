@@ -8,6 +8,16 @@
             <li class="list-group-item" ng-repeat="productOrder in c.productOrders">
               <h4>{{productOrder.product.name}} |                <span style="color:blue"> {{productOrder.quantity}} </span>
  | {{productOrder.product.price*productOrder.quantity | currency}}</h4>
+			    
+			
+			<div>
+			   <input numeric-only ng-model="productOrder.quantity" 
+			   			ng-change="c.updateProductOrder(productOrder)" ng-pattern="onlyNumbers" type="text"/>
+        		<a class="ns-plus"  data-ng-click="c.incrementProductQuantity(productOrder)">+</a>
+        		<a class="ns-minus" data-ng-click="c.decrementProductQuantity(productOrder)">-</a> 
+        	</div>
+			    
+			    
               <input class="btn btn-danger" type="button" ng-click="c.deleteProductOrder(productOrder)" value="Remove" />
             </li>
           </ul>

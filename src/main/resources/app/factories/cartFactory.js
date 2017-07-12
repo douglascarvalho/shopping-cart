@@ -15,6 +15,10 @@
 		return $http.delete(`${restUrl}/cart/deleteFromCart/${productOrder.product.id}`, productOrder);
 	};
 	
+	function updateProductOrder(productOrder) {
+		return $http.put(`${restUrl}/cart/updateProductQuantity`, productOrder);
+	};
+	
 	function getProductsCount() {
 		return $http.get(`${restUrl}/cart/productsCount`);
 	};
@@ -27,6 +31,6 @@
 		return $http.get(`${restUrl}/cart/productsOrderList`);
 	};
 
-    return {addToCart, deleteOrderProduct, getProductsCount, getProductsAmount, getOrderProductList};
+    return {addToCart, deleteOrderProduct, updateProductOrder, getProductsCount, getProductsAmount, getOrderProductList};
   }
 })()

@@ -84,4 +84,16 @@ public class ShoppingCart {
 		}
 	}
 	
+	public void updateProductQuantity(ProductOrder updatedProductOrder) {
+		ProductOrder productOrder = 
+				productOrders.stream()
+				.filter(s -> s.getProduct().getId() == updatedProductOrder.getProduct().getId())
+				.findFirst().orElse(null);
+
+		if (productOrder != null) {
+			productOrder.setQuantity(updatedProductOrder.getQuantity());
+		}
+		
+	}
+	
 }

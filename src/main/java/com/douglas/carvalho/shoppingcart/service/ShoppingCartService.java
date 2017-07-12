@@ -8,7 +8,6 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.douglas.carvalho.shoppingcart.domain.Product;
 import com.douglas.carvalho.shoppingcart.domain.ProductOrder;
 import com.douglas.carvalho.shoppingcart.domain.ShoppingCart;
 import com.douglas.carvalho.shoppingcart.repository.ShoppingCartRepository;
@@ -22,39 +21,22 @@ import com.douglas.carvalho.shoppingcart.repository.ShoppingCartRepository;
 public class ShoppingCartService {
 	
 	private ShoppingCart shoppingCart = new ShoppingCart();
-	
-	@Autowired
-	private ProductService productService;
-	
+		
 	@Autowired
 	private ShoppingCartRepository shoppingCartRepository;
 	
-	public ShoppingCart addToCart(Long productId) {
-		
-		Product product = productService.findById(productId);
-		ProductOrder productOrder = new ProductOrder();
-		productOrder.setShoppingCart(shoppingCart);
-		productOrder.setProduct(product);
-		productOrder.setQuantity(1);
-		
-		shoppingCart.addToCart(productOrder);
-		
-		updateCart();
-		return shoppingCart;
-	}
-	
 	public ProductOrder addToCart(ProductOrder productOrder) {
 		ProductOrder orderProductInCart = shoppingCart.addToCart(productOrder);
-		updateCart();
+		calculateAmount();
 		return orderProductInCart;
 	}
 	
 	public void removeFromCart(long productId) {
 		shoppingCart.removeProductFromCart(productId);
-		updateCart();
+		calculateAmount();
 	}
 	
-	private void updateCart(){
+	private void calculateAmount(){
 		shoppingCart.setAmount(BigDecimal.valueOf(0));  
 		
 		for (ProductOrder productOrder : shoppingCart.getProductOrders()) {
@@ -62,6 +44,11 @@ public class ShoppingCartService {
 					productOrder.getProduct().getPrice().multiply(BigDecimal.valueOf(productOrder.getQuantity()))));
 			
 		}
+	}
+	
+	public void updateProductQuantity(ProductOrder productOrder){
+		shoppingCart.updateProductQuantity(productOrder);
+		calculateAmount();
 	}
 	
 	public ShoppingCart checkout(ShoppingCart shoppingCart){

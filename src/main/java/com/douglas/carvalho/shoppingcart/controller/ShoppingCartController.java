@@ -50,6 +50,12 @@ public class ShoppingCartController {
 		return shoppingCartService.addToCart(productOrder);		
 	}
     
+    @RequestMapping(method = RequestMethod.PUT, produces = "application/json", path = "/updateProductQuantity")
+    public List<ProductOrder> updateProductQuantity(@RequestBody ProductOrder productOrder){
+    	shoppingCartService.updateProductQuantity(productOrder);
+		return shoppingCartService.getProductsInCart();
+    }
+    
 	@RequestMapping(method=RequestMethod.DELETE, value="/deleteFromCart/{id}")
 	public List<ProductOrder> deleteFromCartRest(@PathVariable(value = "id") Long productId) {
 		shoppingCartService.removeFromCart(productId);
