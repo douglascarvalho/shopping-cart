@@ -3,6 +3,7 @@ package com.douglas.carvalho.shoppingcart.service;
 import java.math.BigDecimal;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,23 +21,38 @@ import com.douglas.carvalho.shoppingcart.repository.ShoppingCartRepository;
 @Transactional
 public class ShoppingCartService {
 	
-	private ShoppingCart shoppingCart = new ShoppingCart();
-		
+	private static final String CART_ATTRIBUTE_NAME = "shoppingcart";
+
+	@Autowired
+	private HttpSession httpSession;
+			
 	@Autowired
 	private ShoppingCartRepository shoppingCartRepository;
 	
+	private ShoppingCart getShoppingCartInSession() {
+		ShoppingCart shoppingCart = (ShoppingCart)this.httpSession.getAttribute(CART_ATTRIBUTE_NAME);
+		if (shoppingCart == null) {
+			shoppingCart = new ShoppingCart();
+			this.httpSession.setAttribute(CART_ATTRIBUTE_NAME, shoppingCart);
+		}
+		return shoppingCart;
+	}
+	
 	public ProductOrder addToCart(ProductOrder productOrder) {
+		ShoppingCart shoppingCart = getShoppingCartInSession();
 		ProductOrder orderProductInCart = shoppingCart.addToCart(productOrder);
 		calculateAmount();
 		return orderProductInCart;
 	}
 	
 	public void removeFromCart(long productId) {
+		ShoppingCart shoppingCart = getShoppingCartInSession();
 		shoppingCart.removeProductFromCart(productId);
 		calculateAmount();
 	}
 	
 	private void calculateAmount(){
+		ShoppingCart shoppingCart = getShoppingCartInSession();
 		shoppingCart.setAmount(BigDecimal.valueOf(0));  
 		
 		for (ProductOrder productOrder : shoppingCart.getProductOrders()) {
@@ -47,6 +63,7 @@ public class ShoppingCartService {
 	}
 	
 	public void updateProductQuantity(ProductOrder productOrder){
+		ShoppingCart shoppingCart = getShoppingCartInSession();
 		shoppingCart.updateProductQuantity(productOrder);
 		calculateAmount();
 	}
@@ -58,6 +75,7 @@ public class ShoppingCartService {
 	
 	
 	public int getNumberOfProductsInCart() {
+		ShoppingCart shoppingCart = getShoppingCartInSession();
 		List<ProductOrder> orderProducts = shoppingCart.getProductOrders();
 		int productsInCart = 0;
 		if (orderProducts!=null) {
@@ -69,10 +87,12 @@ public class ShoppingCartService {
 	}
 	
 	public BigDecimal getProductsAmountInCart(){
+		ShoppingCart shoppingCart = getShoppingCartInSession();
 		return shoppingCart.getAmount();
 	}
 
 	public List<ProductOrder> getProductsInCart() {
+		ShoppingCart shoppingCart = getShoppingCartInSession();
 		return shoppingCart.getProductOrders();
 	}
 }
