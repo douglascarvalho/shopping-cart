@@ -11,10 +11,22 @@
 		return $http.post(`${restUrl}/cart/addToCart`, product);
 	};
 	
+	function deleteOrderProduct(productOrder) {
+		return $http.delete(`${restUrl}/cart/deleteFromCart/${productOrder.product.id}`, productOrder);
+	};
+	
 	function getProductsCount() {
 		return $http.get(`${restUrl}/cart/productsCount`);
 	};
+	
+	function getProductsAmount() {
+		return $http.get(`${restUrl}/cart/productsAmount`);
+	};
+	
+	function getOrderProductList() {
+		return $http.get(`${restUrl}/cart/productsOrderList`);
+	};
 
-    return {addToCart, getProductsCount};
+    return {addToCart, deleteOrderProduct, getProductsCount, getProductsAmount, getOrderProductList};
   }
 })()

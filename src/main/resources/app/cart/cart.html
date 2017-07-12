@@ -5,14 +5,14 @@
         <div ng-show="c.cart.length !== 0">
           <h1>Carrinho</h1>
           <ul class="list-group">
-            <li class="list-group-item" ng-repeat="c in c.cart.productOrders">
-              <h4>{{c.product.name}} |                <span style="color:blue"> {{c.quantity}} </span>
- | {{c.product.price*c.quantity | currency}}</h4>
-              <input class="btn btn-danger" type="button" ng-click="removeItemCart(c)" value="Remove" />
+            <li class="list-group-item" ng-repeat="productOrder in c.productOrders">
+              <h4>{{productOrder.product.name}} |                <span style="color:blue"> {{productOrder.quantity}} </span>
+ | {{productOrder.product.price*productOrder.quantity | currency}}</h4>
+              <input class="btn btn-danger" type="button" ng-click="c.deleteProductOrder(productOrder)" value="Remove" />
             </li>
           </ul>
 
-          Total : {{c.cart.amount | currency}}
+          Total : {{c.productsAmountInCart | currency}}
         </div>
         
         <input ng-disabled="c.cart.length === 0" class="btn btn-warn" type="button" ng-click="c.checkout()" value="Checkout" />

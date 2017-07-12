@@ -72,4 +72,16 @@ public class ShoppingCart {
 		}
 	}
 	
+	
+	public void removeProductFromCart(Long productId) {
+		ProductOrder productOrder = 
+				productOrders.stream()
+				.filter(s -> s.getProduct().getId() == productId)
+				.findFirst().orElse(null);
+		
+		if (productOrder != null) {
+			productOrders.remove(productOrder);
+		}
+	}
+	
 }

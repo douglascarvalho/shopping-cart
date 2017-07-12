@@ -15,11 +15,13 @@
 	
 	vm.productsCountInCart = 0;
 	
-    vm.getSummary = function() {
-      const url = `${restUrl}/products`
-      $http.get(url).then(function(response) {
+    vm.init = function() {
+      
+      $http.get(`${restUrl}/products`).then(function(response) {
     	  vm.data = response.data
       })
+      
+      vm.updateCartCount();
       
     }
     
@@ -46,6 +48,6 @@
 		return productOrder;
     }
     
-    vm.getSummary()
+    vm.init()
   }
 })()

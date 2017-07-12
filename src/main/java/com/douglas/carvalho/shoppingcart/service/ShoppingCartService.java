@@ -45,8 +45,13 @@ public class ShoppingCartService {
 	
 	public ProductOrder addToCart(ProductOrder productOrder) {
 		ProductOrder orderProductInCart = shoppingCart.addToCart(productOrder);
-		
+		updateCart();
 		return orderProductInCart;
+	}
+	
+	public void removeFromCart(long productId) {
+		shoppingCart.removeProductFromCart(productId);
+		updateCart();
 	}
 	
 	private void updateCart(){
@@ -74,5 +79,13 @@ public class ShoppingCartService {
 			}
 		}
 		return productsInCart;
+	}
+	
+	public BigDecimal getProductsAmountInCart(){
+		return shoppingCart.getAmount();
+	}
+
+	public List<ProductOrder> getProductsInCart() {
+		return shoppingCart.getProductOrders();
 	}
 }
