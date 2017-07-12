@@ -53,16 +53,22 @@ public class ShoppingCart {
 		this.productOrders = productOrders;
 	}
 
-	public void addToCart(ProductOrder productOrder) {
+	public ProductOrder addToCart(ProductOrder productOrder) {
 		if (productOrders != null && productOrders.contains(productOrder)) {
-			productOrders.stream()
+			ProductOrder oldProductOrder = 
+					productOrders.stream()
 					.filter(s -> s.getProduct().getId() == productOrder.getProduct().getId())
-					.forEach(s -> s.setQuantity(s.getQuantity()+1));
+					.findFirst().orElse(null);
+					
+			oldProductOrder.setQuantity(oldProductOrder.getQuantity()+1);
+			return oldProductOrder;
 		} else {
 			if (productOrders == null) {
 				productOrders = new ArrayList<>();
 			}
 			productOrders.add(productOrder);
+			
+			return productOrder;
 		}
 	}
 	

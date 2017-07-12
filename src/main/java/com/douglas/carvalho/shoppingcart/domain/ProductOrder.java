@@ -34,6 +34,13 @@ public class ProductOrder {
 	
 	private Integer quantity;
 	
+	public ProductOrder() {}
+	
+	public ProductOrder(Product product, Integer quantity) {
+		this.product = product;
+		this.quantity = quantity;
+	}
+	
 	public Long getId() {
 		return id;
 	}

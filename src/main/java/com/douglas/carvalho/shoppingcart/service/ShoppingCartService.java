@@ -1,6 +1,7 @@
 package com.douglas.carvalho.shoppingcart.service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -42,6 +43,12 @@ public class ShoppingCartService {
 		return shoppingCart;
 	}
 	
+	public ProductOrder addToCart(ProductOrder productOrder) {
+		ProductOrder orderProductInCart = shoppingCart.addToCart(productOrder);
+		
+		return orderProductInCart;
+	}
+	
 	private void updateCart(){
 		shoppingCart.setAmount(BigDecimal.valueOf(0));  
 		
@@ -55,5 +62,17 @@ public class ShoppingCartService {
 	public ShoppingCart checkout(ShoppingCart shoppingCart){
 		shoppingCart.getProductOrders().stream().forEach(p -> p.setShoppingCart(shoppingCart));
 		return shoppingCartRepository.save(shoppingCart);
+	}
+	
+	
+	public int getNumberOfProductsInCart() {
+		List<ProductOrder> orderProducts = shoppingCart.getProductOrders();
+		int productsInCart = 0;
+		if (orderProducts!=null) {
+			for (ProductOrder orderProduct: orderProducts) {
+				productsInCart += orderProduct.getQuantity();
+			}
+		}
+		return productsInCart;
 	}
 }

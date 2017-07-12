@@ -1,4 +1,6 @@
 angular.module('primeiraApp', [
 	'ui.router',
-	'ngResource'
+	'ngResource',
+	'ngAnimate',
+	'toastr'
 ])

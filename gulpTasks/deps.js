@@ -4,7 +4,7 @@ const uglifycss = require('gulp-uglifycss')
 const concat = require('gulp-concat')
 
 
-gulp.task('deps', ['deps.js', 'deps.css'])
+gulp.task('deps', ['deps.js', 'deps.css', 'deps.fonts'])
 
 gulp.task('deps.js', function() {
   gulp.src([
@@ -12,6 +12,7 @@ gulp.task('deps.js', function() {
     'node_modules/angular-ui-router/release/angular-ui-router.min.js',
     'node_modules/angular-route/angular-route.min.js',
     'node_modules/angular-resource/angular-resource.min.js',
+    'node_modules/angular-toastr/dist/angular-toastr.tpls.min.js',
     'node_modules/angular-cookies/angular-cookies.min.js',
     'node_modules/angular-sanitize/angular-sanitize.min.js',
     'node_modules/angular-animate/angular-animate.min.js',
@@ -31,4 +32,11 @@ gulp.task('deps.css', function() {
   .pipe(uglifycss({ "uglyComments": true }))
   .pipe(concat('deps.min.css'))
   .pipe(gulp.dest('src/main/resources/static/assets/css/'))
+})
+
+gulp.task('deps.fonts', function() {
+  gulp.src([
+    'node_modules/bootstrap/dist/fonts/*.*'
+  ])
+  .pipe(gulp.dest('public/assets/fonts'))
 })
