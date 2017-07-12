@@ -1,1 +1,0 @@
-angular.module('primeiraApp').constant('restUrl', 'http://shopping-cart-dc.herokuapp.com/shoppingcart')
