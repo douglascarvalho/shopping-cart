@@ -43,7 +43,7 @@
 				<td><a href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i>Continuar Comprando</a></td>
 				<td colspan="2" class="hidden-xs"></td>
 				<td class="hidden-xs text-center"><strong>{{c.productsAmountInCart | currency:'R$'}}</strong></td>
-				<td><a href="#" class="btn btn-success btn-block">Finalizar <i class="fa fa-angle-right"></i></a></td>
+				<td><button ng-disabled="c.productOrders.length < 1" ng-click="c.checkout()" class="btn btn-success btn-block">Finalizar <i class="fa fa-angle-right"></i></button></td>
 			</tr>
 		</tfoot>
 	</table>	

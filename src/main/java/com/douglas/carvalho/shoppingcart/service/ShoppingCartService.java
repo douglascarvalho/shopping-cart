@@ -44,35 +44,24 @@ public class ShoppingCartService {
 		calculateAmount();
 		return orderProductInCart;
 	}
-	
-	public void removeFromCart(long productId) {
-		ShoppingCart shoppingCart = getShoppingCartInSession();
-		shoppingCart.removeProductFromCart(productId);
-		calculateAmount();
-	}
-	
-	private void calculateAmount(){
-		ShoppingCart shoppingCart = getShoppingCartInSession();
-		shoppingCart.setAmount(BigDecimal.valueOf(0));  
-		
-		for (ProductOrder productOrder : shoppingCart.getProductOrders()) {
-			shoppingCart.setAmount(shoppingCart.getAmount().add(
-					productOrder.getProduct().getPrice().multiply(BigDecimal.valueOf(productOrder.getQuantity()))));
-			
-		}
-	}
-	
+
 	public void updateProductQuantity(ProductOrder productOrder){
 		ShoppingCart shoppingCart = getShoppingCartInSession();
 		shoppingCart.updateProductQuantity(productOrder);
 		calculateAmount();
 	}
 	
-	public ShoppingCart checkout(ShoppingCart shoppingCart){
+	public void removeFromCart(long productId) {
+		ShoppingCart shoppingCart = getShoppingCartInSession();
+		shoppingCart.removeProductFromCart(productId);
+		calculateAmount();
+	}
+
+	public ShoppingCart checkout(){
+		ShoppingCart shoppingCart = getShoppingCartInSession();
 		shoppingCart.getProductOrders().stream().forEach(p -> p.setShoppingCart(shoppingCart));
 		return shoppingCartRepository.save(shoppingCart);
 	}
-	
 	
 	public int getNumberOfProductsInCart() {
 		ShoppingCart shoppingCart = getShoppingCartInSession();
@@ -94,5 +83,20 @@ public class ShoppingCartService {
 	public List<ProductOrder> getProductsInCart() {
 		ShoppingCart shoppingCart = getShoppingCartInSession();
 		return shoppingCart.getProductOrders();
+	}
+	
+	private void calculateAmount(){
+		ShoppingCart shoppingCart = getShoppingCartInSession();
+		shoppingCart.setAmount(BigDecimal.valueOf(0));  
+		
+		for (ProductOrder productOrder : shoppingCart.getProductOrders()) {
+			shoppingCart.setAmount(shoppingCart.getAmount().add(
+					productOrder.getProduct().getPrice().multiply(BigDecimal.valueOf(productOrder.getQuantity()))));
+			
+		}
+	}
+
+	public void clearCurrentCart() {
+		this.httpSession.setAttribute(CART_ATTRIBUTE_NAME, new ShoppingCart());
 	}
 }

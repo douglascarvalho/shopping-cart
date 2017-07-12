@@ -1,21 +1,19 @@
 (function() {
   angular.module('primeiraApp').controller('CartCtrl', [
     '$http',
+    '$location',
     'restUrl',
     'cartFactory',
     'msgs',
     CartController
   ])
 
-  function CartController($http, restUrl, cartFactory, msgs) {
+  function CartController($http, $location, restUrl, cartFactory, msgs) {
     
 	const vm = this
-	
-	vm.cart = {amount: 0, productOrders:[]};
-	
+		
     vm.init = function() {
     	vm.updateProductOrderList();
-		vm.updateCartCount();
 		vm.updateCartAmount();
 	}
     
@@ -24,12 +22,6 @@
 			vm.productOrders = response.data;
 		});
     }
-
-	vm.updateCartCount = function() {
-		cartFactory.getProductsCount().then(function(response) {
-			vm.productsCountInCart = response.data;
-		});		
-	};
 	
 	vm.updateCartAmount = function() {
 		cartFactory.getProductsAmount().then(function(response) {
@@ -40,7 +32,6 @@
 	vm.deleteProductOrder = function(productOrder) {
 		cartFactory.deleteOrderProduct(productOrder).then(function(response){
 			vm.updateProductOrderList();
-			vm.updateCartCount();
 			vm.updateCartAmount();
 			msgs.addWarning(productOrder.product.name + " removido do carrinho!" );
 		}).catch(function(response) {
@@ -54,27 +45,23 @@
 		}
 		
 		cartFactory.updateProductOrder(productOrder).then(function(response){
-			vm.updateProductOrderList();
-			vm.updateCartCount();
+			vm.productOrders = response.data;
 			vm.updateCartAmount();
 		}).catch(function(response) {
 	        msgs.addError(response.data)
 		});
 	};
-	
-	vm.incrementProductQuantity = function(productOrder) {
-		productOrder.quantity += 1;
-		vm.updateProductOrder(productOrder);
-	}
-	
-	vm.decrementProductQuantity = function(productOrder) {
-		productOrder.quantity -= 1;
-		vm.updateProductOrder(productOrder);
-	}
 
     vm.checkout = function(){
-	    $http.post(`${restUrl}/cart/purchase`, vm.cart)
-    }
+	    cartFactory.checkout().then(function(response){
+			vm.order = response.data
+			msgs.addSuccess("Compra de Id: " + vm.order.id + " no valor de " + vm.order.amount + " registrada no sistema!");
+			$location.path("/products");
+	    }).catch(function(response) {
+	        msgs.addError(response.data)
+		});
+	    
+    };
     
     vm.init()
   }

@@ -72,7 +72,6 @@ public class ShoppingCart {
 		}
 	}
 	
-	
 	public void removeProductFromCart(Long productId) {
 		ProductOrder productOrder = 
 				productOrders.stream()
@@ -93,7 +92,5 @@ public class ShoppingCart {
 		if (productOrder != null) {
 			productOrder.setQuantity(updatedProductOrder.getQuantity());
 		}
-		
 	}
-	
 }
