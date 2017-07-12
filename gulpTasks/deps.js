@@ -29,6 +29,8 @@ gulp.task('deps.js', function() {
 gulp.task('deps.css', function() {
   gulp.src([
     'node_modules/bootstrap/dist/css/bootstrap.min.css',
+    'node_modules/angular-toastr/dist/angular-toastr.min.css',
+    'node_modules/font-awesome/css/font-awesome.min.css',
     'node_modules/ng-number-spin/dist/css/ng-number-spin.min.css'  
   ])
   .pipe(uglifycss({ "uglyComments": true }))
@@ -38,7 +40,8 @@ gulp.task('deps.css', function() {
 
 gulp.task('deps.fonts', function() {
   gulp.src([
-    'node_modules/bootstrap/dist/fonts/*.*'
+	  'node_modules/font-awesome/fonts/*.*',
+	  'node_modules/bootstrap/dist/fonts/*.*'
   ])
   .pipe(gulp.dest('public/assets/fonts'))
 })

@@ -28,7 +28,7 @@
     vm.addItemToCart = function(product){
     	cartFactory.addToCart(product).then(function(data){
 			vm.updateCartCount();
-			msgs.addSuccess("Added " + product.name + " to Cart!");
+			msgs.addSuccess(product.name + " adicionado ao carrinho!");
 		}).catch(function(response) {
 	        msgs.addError(response.data)
 		});

@@ -28,14 +28,20 @@ public class Product {
     @Column(name = "unit_price")
 	private BigDecimal price;
 
+    @Column(name = "description")
+    private String description;
+    
+    @Column(name= "img_url")
+    private String imgUrl;
     
     public Product() {}
     
-    public Product(String name, BigDecimal price) {
+    public Product(String name, BigDecimal price, String description, String imgUrl) {
 		this.name = name;
 		this.price = price;
+		this.description = description;
+		this.imgUrl = imgUrl;
 	}
-    
     
 	public long getId() {
 		return id;
@@ -59,6 +65,22 @@ public class Product {
 
 	public void setPrice(BigDecimal price) {
 		this.price = price;
+	}
+
+	public String getImgUrl() {
+		return imgUrl;
+	}
+
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	@Override

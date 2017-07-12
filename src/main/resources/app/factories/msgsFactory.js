@@ -6,22 +6,26 @@
 
   function MsgsFactory(toastr) {
 
-    function addMsg(msgs, title, method) {
+    function addMsg(msgs, method) {
       if(msgs instanceof Array) {
-        msgs.forEach(msg => toastr[method](msg, title))
+        msgs.forEach(msg => toastr[method](msg))
       } else {
-        toastr[method](msgs, title)
+        toastr[method](msgs)
       }
     }
 
     function addSuccess(msgs) {
-      addMsg(msgs, 'Sucesso', 'success')
+      addMsg(msgs,'success')
     }
 
     function addError(msgs) {
-      addMsg(msgs, 'Erro', 'error')
+      addMsg(msgs, 'error')
+    }
+    
+    function addWarning(msgs) {
+        addMsg(msgs, 'warning')
     }
 
-    return { addSuccess, addError }
+    return { addSuccess, addError, addWarning }
   }
 })()

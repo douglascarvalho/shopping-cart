@@ -42,13 +42,17 @@
 			vm.updateProductOrderList();
 			vm.updateCartCount();
 			vm.updateCartAmount();
-			msgs.addSuccess("Deleted order for product " + productOrder.product.name );
+			msgs.addWarning(productOrder.product.name + " removido do carrinho!" );
 		}).catch(function(response) {
 	        msgs.addError(response.data)
 		});
 	};
 	
 	vm.updateProductOrder = function(productOrder) {
+		if(!angular.isNumber(productOrder.quantity)) {
+			productOrder.quantity = 1;
+		}
+		
 		cartFactory.updateProductOrder(productOrder).then(function(response){
 			vm.updateProductOrderList();
 			vm.updateCartCount();

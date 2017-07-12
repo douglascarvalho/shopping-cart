@@ -1,32 +1,52 @@
 <!DOCTYPE html>
-   	
-   	<section class="content" ng-controller="CartCtrl as c">
-      <div>
-        <div ng-show="c.cart.length !== 0">
-          <h1>Carrinho</h1>
-          <ul class="list-group">
-            <li class="list-group-item" ng-repeat="productOrder in c.productOrders">
-              <h4>{{productOrder.product.name}} |                <span style="color:blue"> {{productOrder.quantity}} </span>
- | {{productOrder.product.price*productOrder.quantity | currency}}</h4>
-			    
-			
-			<div>
-			   <input numeric-only ng-model="productOrder.quantity" 
-			   			ng-change="c.updateProductOrder(productOrder)" ng-pattern="onlyNumbers" type="text"/>
-        		<a class="ns-plus"  data-ng-click="c.incrementProductQuantity(productOrder)">+</a>
-        		<a class="ns-minus" data-ng-click="c.decrementProductQuantity(productOrder)">-</a> 
-        	</div>
-			    
-			    
-              <input class="btn btn-danger" type="button" ng-click="c.deleteProductOrder(productOrder)" value="Remove" />
-            </li>
-          </ul>
 
-          Total : {{c.productsAmountInCart | currency}}
-        </div>
-        
-        <input ng-disabled="c.cart.length === 0" class="btn btn-warn" type="button" ng-click="c.checkout()" value="Checkout" />
-        
-      </div>
-    </section>
-    
+<section class="content" ng-controller="CartCtrl as c">
+
+<div class="container">
+	<table id="cart" class="table table-hover table-condensed">
+		<thead>
+			<tr>
+				<th style="width:50%">Product</th>
+				<th style="width:10%">Price</th>
+				<th style="width:8%">Quantity</th>
+				<th style="width:22%" class="text-center">Subtotal</th>
+				<th style="width:10%"></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="productOrder in c.productOrders">
+				<td data-th="Product">
+					<div class="row">
+						<div class="col-sm-2 hidden-xs"><img width="100" height="100" src="{{productOrder.product.imgUrl}}" alt="..." class="img-responsive"/></div>
+						<div class="col-sm-10">
+							<h4 class="nomargin">{{productOrder.product.name}}</h4>
+							<p>{{productOrder.product.description}}</p>
+						</div>
+					</div>
+				</td>
+				<td data-th="Price">{{productOrder.product.price | currency:'R$'}}</td>
+				<td data-th="Quantity">
+					<input type="number" min="1" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" 
+					ng-model="productOrder.quantity" ng-change="c.updateProductOrder(productOrder)" class="form-control text-center" >
+				</td>
+				<td data-th="Subtotal" class="text-center">{{productOrder.product.price*productOrder.quantity | currency:'R$'}}</td>
+				<td class="actions" data-th="">
+					<button class="btn btn-danger btn-sm"  ng-click="c.deleteProductOrder(productOrder)"><i class="fa fa-trash-o"></i></button>								
+				</td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr class="visible-xs">
+				<td class="text-center"><strong>Total {{c.productsAmountInCart | currency:'R$'}}</strong></td>
+			</tr>
+			<tr>
+				<td><a href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i>Continuar Comprando</a></td>
+				<td colspan="2" class="hidden-xs"></td>
+				<td class="hidden-xs text-center"><strong>{{c.productsAmountInCart | currency:'R$'}}</strong></td>
+				<td><a href="#" class="btn btn-success btn-block">Finalizar <i class="fa fa-angle-right"></i></a></td>
+			</tr>
+		</tfoot>
+	</table>	
+</div>
+
+</section>
