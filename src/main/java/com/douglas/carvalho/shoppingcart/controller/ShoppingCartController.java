@@ -2,9 +2,8 @@ package com.douglas.carvalho.shoppingcart.controller;
 
 import java.net.URISyntaxException;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,12 +29,8 @@ public class ShoppingCartController {
 	}
 	
     @RequestMapping(method = RequestMethod.POST, produces = "application/json", value = "/purchase")
-    public ShoppingCart purchase(HttpServletRequest request) throws URISyntaxException{
-    	ShoppingCart order = orderService.purchase();
-    	
-		//HttpHeaders header = new HttpHeaders();
-		//header.setLocation(new URI(request.getRequestURL() + "/" + order.getId().toString()));
-
+    public ShoppingCart purchase(@RequestBody ShoppingCart cart) throws URISyntaxException{
+    	ShoppingCart order = orderService.checkout(cart);
 		return order;
     }
     

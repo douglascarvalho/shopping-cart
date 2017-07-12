@@ -30,7 +30,6 @@ public class ProductService {
         products.add(new Product("Óleo de coco", BigDecimal.valueOf(46.90)));
         products.add(new Product("Aveia", BigDecimal.valueOf(6.75)));
         products.add(new Product("Brócolis", BigDecimal.valueOf(5.00)));
-        products.add(new Product("Tribulus Terrestris", BigDecimal.valueOf(40.99)));
     }
 
     public void saveInitialBatch(){

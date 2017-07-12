@@ -52,7 +52,8 @@ public class ShoppingCartService {
 		}
 	}
 	
-	public ShoppingCart purchase(){
+	public ShoppingCart checkout(ShoppingCart shoppingCart){
+		shoppingCart.getProductOrders().stream().forEach(p -> p.setShoppingCart(shoppingCart));
 		return shoppingCartRepository.save(shoppingCart);
 	}
 }
