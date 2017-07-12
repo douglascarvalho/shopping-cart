@@ -1,3 +1,4 @@
 angular.module('primeiraApp', [
-  'ngResource'
+	'ui.router',
+	'ngResource'
 ])

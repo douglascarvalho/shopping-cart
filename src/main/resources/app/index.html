@@ -11,40 +11,9 @@
     
     <title>Shopping Cart Doug</title>
   </head>
-  <body>
-    	
-   	<div class="container">
-      <div ng-controller="ProductCtrl as p">
-        <h1>Loja</h1>
-        <ul class="list-group text-center">
-          <li class="col-xs-6 col-md-3 col-sm-3 col-lg-3 list-group-item" ng-repeat="product in p.data">
-            <figure>
-              <img width="100" height="100" src="https://lh3.googleusercontent.com/-M_NiblLM-0A/Vh9eSY5LIeI/AAAAAAAAB_I/VBeV8X1V2HM/s144-Ic42/mac.jpg" />
-              <figcaption>
-                  {{product.name}}  
-						                      <h3>{{product.price | currency}}</h3>
-              </figcaption>
-            </figure>
-            <input class="btn btn-success" type="button" ng-click="p.addItemToCart(product)" value="BUY" />
-          </li>
-        </ul>
-        <div ng-show="p.cart.length !== 0">
-          <h1>Carrinho</h1>
-          <ul class="list-group">
-            <li class="list-group-item" ng-repeat="c in p.cart.productOrders">
-              <h4>{{c.product.name}} |                <span style="color:blue"> {{c.quantity}} </span>
- | {{c.product.price*c.quantity | currency}}</h4>
-              <input class="btn btn-danger" type="button" ng-click="removeItemCart(c)" value="Remove" />
-            </li>
-          </ul>
-
-          Total : {{p.cart.amount | currency}}
-        </div>
-        
-        <input ng-disabled="p.cart.length === 0" class="btn btn-warn" type="button" ng-click="p.checkout()" value="Checkout" />
-        
-      </div>
-    </div>
-    
+  <body> 
+	<div class="wrapper">
+		<div class="content-wrapper" ui-view></div>
+	</div>
   </body>
 </html>

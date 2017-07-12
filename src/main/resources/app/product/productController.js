@@ -39,10 +39,6 @@
     	
     	vm.cart.amount += parseFloat(product.price)
     }
-    
-    vm.checkout = function(){
-	    $http.post(`${restUrl}/cart/purchase`, vm.cart)
-    }
 
     function createProductOrder(product){
 		const productOrder = {product:{}, quantity:0};
