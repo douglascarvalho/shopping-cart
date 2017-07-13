@@ -40,6 +40,25 @@ e acesse:
 $ localhost:8080/shoppingcart
 ```
 
+## EndPoints:
+
+**GET** ```/products``` Retorna a lista de produtos.
+
+**GET** ```/cart/productsCount``` Retorna a quantidade de produtos no carrinho.
+
+**GET** ```/cart/productsAmount``` Retorna o valor total do carrinho.
+
+**GET** ```/cart/productsOrderList``` Retorna os produtos que estão no carrinho. 
+
+**POST** ```/cart/addToCart``` Adiciona um produto no carrinho. 
+
+**PUT** ```/cart/updateProductQuantity``` Altera um produto do carrinho. 
+
+**DELETE** ```/cart/deleteFromCart/{id}``` Remove um produto do carrinho. 
+
+**POST** ```/cart/checkout``` Finaliza o pedido salvando os dados na base. 
+
+
 ## TODO
 * Autenticação.
 * Página de confirmação do pedido.
