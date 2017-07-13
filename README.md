@@ -29,6 +29,11 @@ No arquivo ```src/main/resources/application.properties``` se encontram as confi
 spring.datasource.username=root
 spring.datasource.password=root
 ```
+O Hibernate também esta configurado para dropar e criar a base no momento do deploy:
+```
+spring.jpa.hibernate.ddl-auto = create-drop
+```
+
 
 ## Para realizar o Build
 Use o Maven:
@@ -71,6 +76,7 @@ $ localhost:8080/shoppingcart
 * Página de histórico de pedidos.
 * Testes unitários e de integração.
 
+## Outras Infos
 **Nota**
 Por algum motivo o PostgresSQl não cria IDs de forma incremental. Pelo pouco que pesquisei é necessário criar uma sequence para que funcione direito de forma incremental (1,2,3,4...). Como desenvolvi inicialmente no MySQL e não tinha esse problema, isso só fui perceber quando fiz deploy no Heroku, porém a consistência da base permanece normalmente.
 
