@@ -1,6 +1,9 @@
 # Shopping Cart
 
-**shopping-cart** foi desenvolvido para um teste usando SpringBoot e AngularJS. A aplicação funciona como um e-commerce, aonde o usuário pode adicionar produtos pré-cadastrados no carrinho, acesssar a página do carrinho para alterar a quantidade ou excluir os itens que não deseja e finalizar o pedido. Assim que o usuário finaliza o pedido é informado qual o ID do pedido e o valor da compra.
+**shopping-cart** foi desenvolvido para um teste usando SpringBoot e AngularJS. A aplicação funciona como um e-commerce, onde o usuário pode adicionar produtos pré-cadastrados no carrinho, acessar a página do carrinho para alterar a quantidade ou excluir os itens que não deseja e finalizar o pedido. Assim que o usuário finaliza o pedido é informado qual o ID do pedido e o valor da compra.
+
+## Arquitetura (Resumo)
+Ao rodar o build o gulp pega as dependencias, minifica os .js e .css e coloca na pasta src/main/resources/static, para que fique disponível dentro do ```jar``` assim que o maven empacotar. O projeto em angular utiliza Controllers e Factories para gerenciar as requisições do DOM. Esses Controllers e Factories fazem requisições para o serviço REST que foi desenvolvido utilizando o Spring (Java). O servidor recebe as requisições, realiza a lógica na camada de Serviço e retorna as informações.
 
 ## Tecnologias
 * **spring-boot** - utilizando os módulos spring-boot-starter-data-jpa para persistencia com hibernate e spring-boot-starter-web para criar RESTful Web Service.
@@ -12,7 +15,10 @@
 * **maven** para iniciar o build do front, realizar o build do projeto Java e criar o jar. 
 
 ## Demo
-Foi realizado deploy do projeto no Heroku, que pode ser acessado neste link: [Heroku](https://shopping-cart-dc.herokuapp.com/shoppingcart)
+Foi realizado deploy do projeto no Heroku, que pode ser acessado neste link: 
+[Heroku](https://shopping-cart-dc.herokuapp.com/shoppingcart)
+
+**Nota:** Talvez demore alguns segundos para abrir pois o Heroku desliga os dynos quando o servidor para de receber requisições.
 
 
 ## Configurações importantes antes do Build
